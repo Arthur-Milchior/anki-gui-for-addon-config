@@ -1,0 +1,4 @@
+[submodule "qt-jsonschema-form"]
+	path = schema_to_gui
+	url = https://github.com/Arthur-Milchior/qt-jsonschema-form
+	branch = ui_in_schema
