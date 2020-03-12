@@ -52,7 +52,7 @@ def on_gui(self):
         return
 
     builder = WidgetBuilder()
-    form = builder.create_form(schema)
+    form = builder.create_form(schema, palette=mw.palette())
     form.widget.state = conf
 
     
