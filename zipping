@@ -1,2 +1,2 @@
 rm GUI.zip
-zip -R GUI.zip config.* *py  LICENSE *.md zipping --exclude \*~ \*zip ankiweb schema_to_gui/qt_jsonschema_form
+zip -R GUI.zip config.* *py  LICENSE *.md zipping schema_to_gui/qt_jsonschema_form/* --exclude \*~ \*zip ankiweb 
