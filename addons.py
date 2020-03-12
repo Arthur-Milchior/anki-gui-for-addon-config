@@ -12,10 +12,10 @@ old_init = AddonsDialog.__init__
 def __init__(self, *args, **kwargs):
     old_init(self, *args, **kwargs)
     self.form.gui_config = QtWidgets.QPushButton(self)
-    self.form.gui_config.setObjectName(_("GUI"))
+    self.form.gui_config.setObjectName(_("Easy Config"))
     self.form.verticalLayout.addWidget(self.form.gui_config)
     self.form.gui_config.clicked.connect(self.on_gui)
-    self.form.gui_config.setText(_("GUI"))
+    self.form.gui_config.setText(_("Easy Config"))
 AddonsDialog.__init__ = __init__
 
 old_onAddonItemSelected = AddonsDialog._onAddonItemSelected
