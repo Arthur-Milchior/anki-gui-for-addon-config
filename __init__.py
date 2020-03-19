@@ -1,18 +1,15 @@
 from PyQt5 import Qt, QtCore, QtWidgets
 
 from anki.lang import _
-from aqt import mw
+from aqt import gui_hooks, mw
 from aqt.addons import AddonsDialog
 from aqt.utils import restoreGeom, showInfo
 
 from .addon_schema import _addonSchema, _schema_exists
 from .schema_to_gui.qt_jsonschema_form.form import WidgetBuilder
 
-old_init = AddonsDialog.__init__
 
-
-def __init__(self, *args, **kwargs):
-    old_init(self, *args, **kwargs)
+def init(self):
     self.form.gui_config = QtWidgets.QPushButton(self)
     self.form.gui_config.setObjectName(_("Easy Config"))
     self.form.verticalLayout.addWidget(self.form.gui_config)
@@ -20,23 +17,16 @@ def __init__(self, *args, **kwargs):
     self.form.gui_config.setText(_("Easy Config"))
 
 
-AddonsDialog.__init__ = __init__
-
-old_onAddonItemSelected = AddonsDialog._onAddonItemSelected
+gui_hooks.addons_dialog_will_show.append(init)
 
 
-def _onAddonItemSelected(self: AddonsDialog, row_int):
-    old_onAddonItemSelected(self, row_int)
-    try:
-        addon = self.addons[row_int]
-    except IndexError:
-        return
+def _onAddonItemSelected(self: AddonsDialog, addon):
     if not addon:
         return
     self.form.gui_config.setEnabled(_schema_exists(self.mgr, addon.dir_name))
 
 
-AddonsDialog._onAddonItemSelected = _onAddonItemSelected
+gui_hooks.addons_dialog_did_change_selected_addon.append(_onAddonItemSelected)
 
 
 def on_gui(self):
