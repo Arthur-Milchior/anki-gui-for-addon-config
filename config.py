@@ -54,7 +54,6 @@ def writeConfig():
     mw.addonManager.writeConfig(__name__, userOption)
 
 
-
 def update(_):
     global userOption, fromName
     userOption = None
